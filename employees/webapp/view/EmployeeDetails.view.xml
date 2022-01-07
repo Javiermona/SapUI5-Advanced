@@ -1,0 +1,56 @@
+<mvc:View xmlns:vbm="sap.ui.vbm"
+    controllerName="logaligroup.employees.controller.EmployeeDetails"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"   
+    xmlns:core="sap.ui.core" >
+    
+<Page title="{i18n>EmployeeDetails}">
+  <Panel>
+    <FlexBox height="65px" alignItems="Center" justifyContent="Center">
+        <items> 
+           <Text text= "{jsonEmployee>/LastName}, {jsonEmployee>/FirstName}" class="boldText" />
+        </items>
+    </FlexBox>
+            <FlexBox height="65px" alignItems="Start" justifyContent="SpaceBetween">
+               <items>
+                    <VBox>
+                                <Text text="{i18n>EmployeeID}" class="boldText sapUiTinyMarginEnd" />
+                                <Text text= "{jsonEmployee>EmployeeID}"  />
+                        <VBox>
+                                <Text text="{i18n>TitleEmployee}" class="boldText" />
+                                <Text text= "{jsonEmployee>Title"  />
+                        </VBox>
+                    </VBox>
+                 </items>
+            </FlexBox>
+                <FlexBox   alignItems="Start" >
+                <items>
+                            <HBox>
+                                        <Text text="{i18n>CountryCode}" class="boldText sapUiTinyMarginEnd" />
+                                        <Text text= "{jsonEmployee>Country}"  />
+                                        <layoutData>
+                                            <FlexItemData growFactor="3"></FlexItemData>
+                                        </layoutData>
+                            </HBox>
+                            <HBox>
+                                        <Text text="{i18n>City}" class="boldText sapUiTinyMarginEnd" />
+                                        <Text text= "{jsonEmployee>City}"  />
+                                        <layoutData>
+                                            <FlexItemData growFactor="2"></FlexItemData>
+                                        </layoutData>
+                            </HBox>
+                            <FlexBox direction="Row" alignItems="Start">
+                                        <Text text="{i18n>PostalCode}" class="boldText sapUiTinyMarginEnd" />
+                                        <Text text= "{jsonEmployee>PostalCode}"  />
+                                        <layoutData>
+                                            <FlexItemData growFactor="1"></FlexItemData>
+                                        </layoutData>                                        
+                            </FlexBox>
+                </items>
+                </FlexBox>
+  
+</Panel>
+</Page>
+</mvc:View>
+ 
