@@ -42,6 +42,11 @@ function (Controller, JSONModel) {
                 var detailView = this.getView().byId("employeeDetailsView");
                 detailView.bindElement("jsonEmployee>" + path);
                 this.getView().getModel("jsonLayout").setProperty("/ActiveKey", "TwoColumnsMidExpanded");       
+            
+                var incidenceModel = new sap.ui.model.json.JSONModel([]);
+                detailView.setModel(incidenceModel, "incidenceModel");
+                detailView.byId("tableIncidence").removeAllContent();
+            
             } 
 
 
