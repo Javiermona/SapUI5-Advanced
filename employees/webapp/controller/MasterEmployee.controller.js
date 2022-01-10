@@ -43,14 +43,14 @@ sap.ui.define([
         var IconPress = oEvent.getSource();
 
         // Contecto del modelo
-        var oContext = IconPress.getBindingContext("jsonEmployee");
+        var oContext = IconPress.getBindingContext("odataNorthwind");
         if (!this._oDialogOrders) {
             this._oDialogOrders = sap.ui.xmlfragment("logaligroup.employees.fragment.DialogOrders", this);
             this.getView().addDependent(this._oDialogOrders);
         };
 
         // Dialog Binding to the context to have access to the data og slected item
-        this._oDialogOrders.bindElement("jsonEmployee>" + oContext.getPath());
+        this._oDialogOrders.bindElement("odataNorthwind>" + oContext.getPath());
         // open dialig
         this._oDialogOrders.open();
     };
@@ -84,14 +84,14 @@ sap.ui.define([
         this._bus.publish("felexible", "showEmployee", path);
     };*/
     function showEmployee(oEvent) {
-    var path = oEvent.getSource().getBindingContext("jsonEmployee").getPath();
+    var path = oEvent.getSource().getBindingContext("odataNorthwind").getPath();
     this._bus.publish("flexible", "showEmployee", path);
     };
 
 
     function showPostCode(oEvent) {
         var itemPressed = oEvent.getSource();
-        var oContext = itemPressed.getBindingContext("jsonEmployee");
+        var oContext = itemPressed.getBindingContext("odataNorthwind");
         var objectContext = oContext.getObject();
         sap.m.MessageToast.show(objectContext.PostalCode);
     }

@@ -10,15 +10,25 @@
       "title": "{{appTitle}}",
       "description": "{{appDescription}}",
       "dataSources": {
-        "mainService": {
-          "uri": "/sap/opu/odata/",
-          "type": "OData",
-          "settings": {
-            "annotations": [],
-            "localUri": "localService/metadata.xml",
-            "odataVersion": "4.0"
-          }
+        "Northwind.svc": {
+            "uri": "V2/Northwind/Northwind.svc/",
+            "type": "OData",
+            "settings": {
+                "odataVersion": "2.0",
+                "localUri": "localService/metadata.xml"
+            }
+        },
+        
+        "YSAPUI5_SRV_01" : { 
+            "uri": "/sap/YSAPUI5_SRV_01/",
+            "type": "OData",
+            "settings": {
+                "odataVersion": "2.0",
+                "localUri": "localService/YSAPUI5_SRV_01/metadata.xml"
+            }
         }
+ 
+
       }
     },
     "sap.ui": {
@@ -56,16 +66,28 @@
             "bundleName": "logaligroup.employees.i18n.i18n"
           }
         },
-        "": {
-          "dataSource": "mainService",
-          "preload": true,
-          "settings": {
-            "synchronizationMode": "None",
-            "operationMode": "Server",
-            "autoExpandSelect": true,
-            "earlyRequests": true,
-            "groupId": "$direct"
-          }
+        "odataNorthwind": {
+            "dataSource": "Northwind.svc",
+            "preload": true,
+            "settings": {
+              "defaultOperationMode": "Server",
+              "defaultBindingMode": "OneWay",
+              "defaultCountMode": "Request",
+              "refreshAfterChange": false
+            }
+        },
+        "incidenceModel": {
+            "type" : "sap.ui.model.odata.v2.ODataModel",
+            "dataSource": "YSAPUI5_SRV_01",
+            "preload": true,
+            "settings": {
+                "defaultOperationMode": "Server",
+                "defaultBindingMode": "OneWay",
+                "defaultCountMode": "Request",
+                "refreshAfterChange": false,
+                "useBach": false,
+                "defaultUpdateMethod" : "Put"
+              }
         }
       },
       "resources": {
