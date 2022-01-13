@@ -1,6 +1,7 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller", "sap/ui/model/json/JSONModel"
-], function (Controller, JSONModel) {
+    "sap/ui/core/mvc/Controller", "sap/ui/model/json/JSONModel",
+    "sap/m/MessageBox"
+], function (Controller, JSONModel, MessageBox) {
 
 
     return Controller.extend("logaligroup.employees.controller.Main", {
@@ -62,16 +63,7 @@ sap.ui.define([
 
         },
 
-        /*  showEmployeeDetails: function (category, nameEvent, path) {
-            var detailView = this.getView().byId("detailEmployeeView");
-            detailView.bindElement("odataNorthwind>" + path);
-            this.getView().getModel("jsonLayout").setProperty("/ActiveKey", "TwoColumnsMidExpanded");
-
-            var incidenceModel = new sap.ui.model.json.JSONModel([]);
-            detailView.setModel(incidenceModel, "incidenceModel");
-            detailView.byId("tableIncidence").removeAllContent();
-
-        }*/
+    
         showEmployeeDetails: function (category, nameEvent, path) {
             var detailView = this.getView().byId("detailEmployeeView");
             detailView.bindElement("odataNorthwind>" + path);
@@ -93,11 +85,12 @@ sap.ui.define([
                     CreationDate: incidenceModel[data.incidenceRow].CreationDate,
                     Reason: incidenceModel[data.incidenceRow].Reason,
                     Type: incidenceModel[data.incidenceRow].Type
-                };
+                };                                                  
                 this.getView().getModel("incidenceModel").create("/IncidentsSet", body, {
                     success: function () {
                         this.onReadODataIncidence.bind(this)(employeeId);
-                        sap.m.MessageToast.show(oResourceBundle.getText("odataSaveOK"));
+                        MessageBox.success(oResourceBundle.getText("odataSaveOK"));
+                       // sap.m.MessageToast.show(oResourceBundle.getText("odataSaveOK"));
                     }.bind(this),
                     error: function (e) {
                         sap.m.MessageToast.show(oResourceBundle.getText("odataSaveKO"));
@@ -107,7 +100,9 @@ sap.ui.define([
                 sap.m.MessageToast.show(oResourceBundle.getText("odataNoChanges"));
             };
         },
+        // Leo el odata
         onReadODataIncidence: function (employeeID) {
+
             this.getView().getModel("incidenceModel").read("/IncidentsSet", {
                 filters: [
                     new sap.ui.model.Filter("SapId", "EQ", this.getOwnerComponent().SapId),
@@ -120,6 +115,9 @@ sap.ui.define([
                     var tableIncidence = this._detailEmployeeView.byId("tableIncidence");
                     tableIncidence.removeAllContent();
                     for (var incidence in data.results) {
+                        data.results[incidence]._validateData = true;
+                        data.results[incidence].enabledSave = false;
+
                         var newIncidence = sap.ui.xmlfragment("logaligroup.employees.fragment.NewIncidence", this._detailEmployeeView.getController());
                         this._detailEmployeeView.addDependent(newIncidence);
                         newIncidence.bindElement("incidenceModel>/" + incidence);
@@ -129,73 +127,6 @@ sap.ui.define([
                 error: function (e) {}
             });
         }
-
-
-        /*
-
-        onSaveOdataIcidence: function (channelId, eventId, data) {
-            var oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
-            var employeesId = this._employeeDetailsView.getBindingContext("odataNorthwind").getObject().EmployeeID;
-            var incidenceModel = this._employeeDetailsView.getModel("incidenceModel").getData();
-
-            if (typeof incidenceModel[data.incidenceRow].IncidenceId == 'undefined') {
-                // Obtenemos el valor a Grabar
-                // Crea la llamada
-                var body = {
-                    SapId: this.getOwnerComponent().SapId,
-                    EmployeeId: employeesId.toString(),
-                    CreationDate: incidenceModel[data.incidenceRow].CreationDate,
-                    Type: incidenceModel[data.incidenceRow].Type,
-                    Reason: incidenceModel[data.incidenceRow].Reason
-
-
-                };
-                // Obtenemos el modelo
-                this.getView().getModel("incidenceModel").create("/IncidentsSet", body, {
-                    success: function () {
-                        sap.m.MessageToast.show(oResourceBundle.getText("odataSaveOK"));
-                    }.bind(this),
-                    error: function (e) {
-                        sap.m.MessageToast.show(oResourceBundle.getText("odataSaveKO"));
-                    }.bind(this)
-                })
-
-            } else {
-                sap.m.MessageToast.show(oResourceBundle.getText("odataNoChange"));
-            }
-        },
-*/
-        // Lectura del odata
-
-        /*    onReadoDateIncidence: function (EmployeeId) {
-            this.getView().getModel("incidenceModel").read("/IncidentsSet", {
-                filters: [
-                    new sap.ui.model.filter("SapId", "EQ", this.getOwnerComponent().SapId),
-                    new sap.ui.model.filter("EmployeeId", "EQ", employeesId.toString())
-                ],
-                success: function (data) {
-                    var incidenceModel = this._employeeDetailsView.getModel("incidenceModel");
-                    incidenceModel.setData(data.results);
-                    var tableIncidence = this._employeeDetailsView.getView().byId("tableIncidence");
-                    tableIncidence.removeAllContent();
-                    for (var incidence in data.results) {
-                        var newIncidence = sap.ui.xmlfragment("logaligroup.employees.fragment.NewIncidence", this._employeeDetailsView.getController());
-                        this._employeeDetailsView.addDependemt(newIncidence);
-                        newIncidence.bindElement("incidenceModel>/" + incidence);
-
-                    }
-
-
-                }
-
-            });
-
-
-        },
-*/
-
-        // Funcion
-
 
     });
 
