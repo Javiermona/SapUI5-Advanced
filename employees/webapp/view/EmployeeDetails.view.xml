@@ -52,17 +52,21 @@
                 </FlexBox>
   
 </Panel>
-<Panel class="sapUiSizeCompact" backgroundDesign="Transparent">
-    <headerToolbar>
-        <Toolbar >
-            <Title text="{i18n>incidence} {=${odataNorthwind>Country} !== 'USA'  ? ${i18n>Europe} : ${i18n>us}}"/> 
-            <ToolbarSpacer ></ToolbarSpacer>
-            <Button text="{i18n>CreateIncidence}" press="onCreateIncidence"/>
-        </Toolbar>
-    </headerToolbar>
-</Panel>
-<Panel id="tableIncidence" class="sapUiNoContentPadding" backgroundDesign="Transparent"> 
-</Panel>
+            <Panel class="sapUiSizeCompact" backgroundDesign="Transparent">
+                <headerToolbar>
+                    <Toolbar >
+                        <Title text="{i18n>incidence} {=${odataNorthwind>Country} !== 'USA'  ? ${i18n>Europe} : ${i18n>us}}"/> 
+                        <ToolbarSpacer ></ToolbarSpacer>
+                        <Button text="{i18n>CreateIncidence}" press="onCreateIncidence"/>
+                    </Toolbar>
+                </headerToolbar>
+            </Panel>
+        <Panel id="tableIncidence" class="sapUiNoContentPadding" backgroundDesign="Transparent"> 
+        </Panel>
+        
+        <Panel class="sapUiSizeCompact" backgroundDesign="Transparent" headerText="{i18n>orders}">
+            <core:Fragment fragmentName="logaligroup.employees.fragment.TableOrders" type="XML"/>
+        </Panel>
 </Page>
 </mvc:View>
  
