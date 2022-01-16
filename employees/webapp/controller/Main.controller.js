@@ -102,7 +102,7 @@ sap.ui.define([
         },
         // Leo el odata
         onReadODataIncidence: function (employeeID) {
-
+ 
             this.getView().getModel("incidenceModel").read("/IncidentsSet", {
                 filters: [
                     new sap.ui.model.Filter("SapId", "EQ", this.getOwnerComponent().SapId),
@@ -126,6 +126,7 @@ sap.ui.define([
                 }.bind(this),
                 error: function (e) {}
             });
+            
         }
 
     });

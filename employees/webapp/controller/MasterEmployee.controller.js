@@ -94,9 +94,24 @@ sap.ui.define([
         var oContext = itemPressed.getBindingContext("odataNorthwind");
         var objectContext = oContext.getObject();
         sap.m.MessageToast.show(objectContext.PostalCode);
-    }
+    };
+
+
+    function OrderDetails(oEvent){
+  
+        let orderID = oEvent.getSource().getBindingContext("odataNorthwind").getObject().OrderID;
+        let oRouter = sap.ui.core.UIComponent.getRouterFor(this); // Paso el componente
+        oRouter.navTo("RouteOrderDetails",{
+            OrderID : orderID 
+        });
+ 
+    };
+
+
+
     var Main = Controller.extend("logaligroup.employees.controller.MasterEmployee", {});
 
+    /*
 
     Main.prototype.onValidate = function () {
         let inputEmployee = this.byId("inputEmployee");
@@ -109,7 +124,9 @@ sap.ui.define([
             this.getView().byId("labelCountry").setVisible(false);
             this.getView().byId("slCountry").setVisible(false);
         }
-    };
+    }; */
+
+
     Main.prototype.onInit = onInit;
     Main.prototype.onFilter = onFilter;
     Main.prototype.onClearFilter = onClearFilter;
@@ -119,5 +136,6 @@ sap.ui.define([
     Main.prototype.showOrders = showOrders;
     Main.prototype.onCloseOrders = onCloseOrders;
     Main.prototype.showEmployee  = showEmployee;
+    Main.prototype.OrderDetails = OrderDetails;
     return Main;
 });

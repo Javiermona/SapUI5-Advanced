@@ -41,7 +41,7 @@ sap.ui.define([
                 }
             }.bind(this)
         });
-    } ;
+    };
 
 
     function onSaveIncidence(oEvent) {
@@ -111,6 +111,16 @@ sap.ui.define([
         } contextObj.TypeX = true;
         context.getModel().refresh();
     };
+
+    function OrderDetails(oEvent) {
+        let OrderID = oEvent.getSource().getBindingContext("odataNorthwind").getObject().OrderID;
+        let oRouter = sap.ui.core.UIComponent.getRouterFor(this); // Paso el componente
+        oRouter.navTo("RouteOrderDetails", {
+            OrderID: OrderID
+        });
+         
+    };
+
     var EmployeeDetails = Controller.extend("logaligroup.employees.controller.EmployeeDetails", {});
 
     EmployeeDetails.prototype.onInit = onInit;
@@ -120,6 +130,7 @@ sap.ui.define([
     EmployeeDetails.prototype.onSaveIncidence = onSaveIncidence;
     EmployeeDetails.prototype.updateIncidenceCreationDate = updateIncidenceCreationDate;
     EmployeeDetails.prototype.updateIncidenceReason = updateIncidenceReason;
+    EmployeeDetails.prototype.OrderDetails = OrderDetails;
     return EmployeeDetails;
 
 })
