@@ -1,5 +1,6 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "logaligroup/employees/controller/Base.controller",
+    // "sap/ui/core/mvc/Controller",
     "sap/ui/model/Filter", 
     "sap/ui/model/FilterOperator",
     "sap/ui/model/json/JSONModel"
@@ -11,7 +12,7 @@ sap.ui.define([
      * @param {typeof sap.ui.model.FilterOperator} FilterOperator
      * 
      */
-    function (Controller, Filter, FilterOperator, JSONModel) {
+    function (Base, Filter, FilterOperator, JSONModel) {
     "use strict";
     function onInit() { // let i18nBundle = oView.getModel("i18n").getResourceBundle();
         this._bus = sap.ui.getCore().getEventBus();
@@ -96,7 +97,7 @@ sap.ui.define([
         sap.m.MessageToast.show(objectContext.PostalCode);
     };
 
-
+/*
     function OrderDetails(oEvent){
   
         let orderID = oEvent.getSource().getBindingContext("odataNorthwind").getObject().OrderID;
@@ -106,26 +107,12 @@ sap.ui.define([
         });
  
     };
+*/
 
 
+    var Main = Base.extend("logaligroup.employees.controller.MasterEmployee", {});
 
-    var Main = Controller.extend("logaligroup.employees.controller.MasterEmployee", {});
-
-    /*
-
-    Main.prototype.onValidate = function () {
-        let inputEmployee = this.byId("inputEmployee");
-        let valueEmployee = inputEmployee.getValue();
-
-        if (valueEmployee.length === 6) { // inputEmployee.setDescription("OK");
-            this.getView().byId("labelCountry").setVisible(true);
-            this.getView().byId("slCountry").setVisible(true);
-        } else { // inputEmployee.setDescription("NOT OK");
-            this.getView().byId("labelCountry").setVisible(false);
-            this.getView().byId("slCountry").setVisible(false);
-        }
-    }; */
-
+   
 
     Main.prototype.onInit = onInit;
     Main.prototype.onFilter = onFilter;
@@ -135,7 +122,6 @@ sap.ui.define([
     Main.prototype.onHideCity = onHideCity;
     Main.prototype.showOrders = showOrders;
     Main.prototype.onCloseOrders = onCloseOrders;
-    Main.prototype.showEmployee  = showEmployee;
-    Main.prototype.OrderDetails = OrderDetails;
+    Main.prototype.showEmployee  = showEmployee; 
     return Main;
 });
