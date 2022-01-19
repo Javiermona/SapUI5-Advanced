@@ -53,7 +53,7 @@ sap.ui.define(["sap/ui/core/Control"], function (Control) {
             this.signaturePad.fill = false;
         },
 
-        isFull: function () {
+        isFill: function () {
         return this.signaturePad.fill;
 
         },

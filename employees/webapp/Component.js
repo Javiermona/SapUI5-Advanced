@@ -26,7 +26,7 @@ sap.ui.define([
                 // set the device model
                 this.setModel(models.createDeviceModel(), "device");
             }, 
-            SapId: "javiermona@gmail.com"
+            SapId: "training@logaligroup.com" //"javiermona@gmail.com"
         });
     }
 );

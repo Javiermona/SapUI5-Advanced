@@ -56,17 +56,32 @@ displayBlock="true" xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layou
                     <Button text="{i18n>clear}" press="onClearSignature" class="sapUiTinyMarginBegin"></Button>
                     </FlexBox>
               </l:Grid>
+
+                <UploadCollection   id="uploadCollection"
+                                    maximumFilenameLength="55"
+                                    maximumFileSize="10"
+                                    multiple="true"
+                                    sameFilenameAllowed="true"
+                                    instantUpload="true"
+                                    uploadUrl="/sap/opu/odata/sap/YSAPUI5_SRV_01/FilesSet"
+                                    change="onFileChange"
+                                    uploadComplete="onFileUploadComplete"
+                                    beforeUploadStarts="onFileBeforeUpload"
+                                    fileDeleted="onFileDeleted"/>
+
+
+
             </Panel>
             <Panel headerText="{i18n>orderproducts}">
             <List items="{path:'odataNorthwind>Order_Details', parameters:{expand: 'Product'}, factory:'.factoryOrderDetails' }"/>          
             </Panel>
         </content>
-     <footer>
-        <Toolbar>
+            <footer>
+            <Toolbar>
             <ToolbarSpacer></ToolbarSpacer>
-            <Button text="{i18n>SaveSignature}" press="onSaveSignatre"/>
-        </Toolbar>
-    </footer>
+            <Button text="{i18n>saveSignature}" press="onSaveSignatre"></Button>
+            </Toolbar>
+            </footer>
  
     </Page>
 </mvc:View>
